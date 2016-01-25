@@ -95,6 +95,8 @@ println(String.format("    Address: %s", anAddress));
 
 ``` 
 
+If you want to know more about the classes used here, you can look at the Javadoc for [KeyPair](http://www.nem.ninja/org.nem.core/org/nem/core/crypto/KeyPair.html),[Address](http://www.nem.ninja/org.nem.core/org/nem/core/model/Address.html) and [NetworkInfos](http://www.nem.ninja/org.nem.core/org/nem/core/model/NetworkInfos.html).
+
 ## Windows
 
 See [Gimer's
