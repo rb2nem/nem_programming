@@ -1,6 +1,15 @@
 # Setting up the development environment
 
-Based on [Gimer's 101](https://forum.nem.io/t/nem-development-101-episode-01-java-git-maven-nem-core/1656)
+In this guide we will work with [Groovy](http://www.groovy-lang.org/), a language perfectly wel integrated 
+in the Java ecosystem, and easy to fiddle with, providing a [groovysh](http://www.groovy-lang.org/groovysh.html) 
+shell.
+
+The currently recommended way to setup the development environment to follow this guide is to run a docker
+container configure with all that's needed. However, instructions of the [Dockerfile](https://github.com/rb2nem/nem-dev-docker/blob/master/Dockerfile)
+should give you an idea of how to set it up manually should you wish to, and the script [test.groovy](https://github.com/rb2nem/nem-dev-docker/blob/master/test.groovy) 
+used here is also available.
+
+The code in this section is based on [Gimer's 101](https://forum.nem.io/t/nem-development-101-episode-01-java-git-maven-nem-core/1656)
 but using [sdkman](http://sdkman.io/).
 
 ## Docker
@@ -153,20 +162,4 @@ issue the command:
 ```
 $ mvn dependency:copy-dependencies -DoutputDirectory=/root/.groovy/lib/
 ```
-
-To test your installation, put this groovy code in a file `test.groovy` and try running it with `groovy test.groovy`:
-```
-import org.nem.core.crypto.KeyPair;
-import org.nem.core.model.Address;
-import org.nem.core.model.NetworkInfos;
-
-
-someKey = new KeyPair();
-println(String.format("Private key: %s", someKey.getPrivateKey()));
-println(String.format(" Public key: %s", someKey.getPublicKey()));
-
-anAddress = Address.fromPublicKey(
-              NetworkInfos.getTestNetworkInfo().getVersion(),
-                                                        someKey.getPublicKey());
-println(String.format("    Address: %s", anAddress));
-``` 
+You are now ready to test your setup with the [test.groovy](https://github.com/rb2nem/nem-dev-docker/blob/master/test.groovy)!
