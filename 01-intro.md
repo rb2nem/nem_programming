@@ -19,6 +19,7 @@ Nem is providing:
 * a one minute average block time
 * delegated harvesting: not need to let your own computer connected to compute blocks and reap fees, you can delegate your importance to 
   a NIS instance of your choice without risk of loosing your funds
+* a currency named XEM, used to pay for fees of operations on the blockchain
 
 ## Integrating with Nem
 
@@ -33,6 +34,19 @@ Nem blockchain. Complete documentation is available as [javadoc](http://www.nem.
 
 This approach lets you use any language, but is more cumbersome as you interact with a NIS instance providing a REST interface and you, 
 or your rest library, need to manage all communication with NIS.
+
+## Testing net
+
+Before you run your code on the Nem blockchain, you might want to validate it in a test environment, without having to spend real XEMS
+to pay the fees of your operations. That's the purpose of the test net, a version of the Nem blockchain used for testing not only your
+applications, but also newer versions of the Nem software itself.
+
+If you run a NIS instance yourself, you can configure it with the key `nem.network`. For you NIS to join the production Nem blockchain, 
+set its value to `mainnet`, and for it to use the test blockchain, set its value to `testnet`. `mainnet` and `testnet`  is also the way we will identify 
+in this document the two environments. 
+
+If you don't run your own NIS instance, but still want to work in the testnet, you can find a list of NIS instance part of the testnet at
+[http://bob.nem.ninja:8765/#/nodes/](http://bob.nem.ninja:8765/#/nodes/).
 
 ## Technical links
 
