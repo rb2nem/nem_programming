@@ -104,6 +104,8 @@ println(String.format("    Address: %s", anAddress));
 
 ``` 
 
+If this works fine, you're all set to go. We will take a closer look at this code and build on it in the coming chapters.
+
 If you want to know more about the classes used here, you can look at the Javadoc for [KeyPair](http://www.nem.ninja/org.nem.core/org/nem/core/crypto/KeyPair.html),[Address](http://www.nem.ninja/org.nem.core/org/nem/core/model/Address.html) and [NetworkInfos](http://www.nem.ninja/org.nem.core/org/nem/core/model/NetworkInfos.html).
 
 ## Windows

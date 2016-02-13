@@ -55,4 +55,4 @@ If you don't run your own NIS instance, but still want to work in the testnet, y
 * [NCC API](http://nem.io/ncc/index.html)
 * [Javadoc](http://www.nem.ninja/org.nem.core/)
 * [Nem's Github](https://github.com/NewEconomyMovement)
-
+* [Bitcoin and Cryptocurrency Technologies](https://freedom-to-tinker.com/blog/randomwalker/the-princeton-bitcoin-textbook-is-now-freely-available/)
