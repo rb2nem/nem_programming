@@ -81,7 +81,8 @@ import org.nem.core.model.BlockFactory;
 
 node = NodeEndpoint.fromHost("87.98.159.171");
 http = new HttpMethodClient<ErrorResponseDeserializerUnion>();
-conn = new DefaultAsyncNemConnector<NisApiId>(http,{e->throw new RuntimeException();});
+conn = new DefaultAsyncNemConnector<NisApiId>(http,
+                                              {e->throw new RuntimeException();});
 conn.setAccountLookup(Account.metaClass.&invokeConstructor  )
 f=conn.getAsync(node,NisApiId.NIS_REST_CHAIN_HEIGHT,null)
 bh = new BlockHeight(f.get())
@@ -149,7 +150,8 @@ import org.nem.core.serialization.Deserializer;
 
 node = NodeEndpoint.fromHost("87.98.159.171");
 http = new HttpMethodClient<ErrorResponseDeserializerUnion>();
-conn = new DefaultAsyncNemConnector<NisApiId>(http,{ e -> throw new RuntimeException() ;});
+conn = new DefaultAsyncNemConnector<NisApiId>(http,
+                                              { e -> throw new RuntimeException() ;});
 conn.setAccountLookup(Account.metaClass.&invokeConstructor  )
 f=conn.getAsync(node,NisApiId.NIS_REST_CHAIN_LAST_BLOCK,null)
 
