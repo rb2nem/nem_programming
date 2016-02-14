@@ -31,7 +31,7 @@ requesting infor about it with `REST_NODE_INFO`, getting its peers list with `RE
 
 But let's focus on out call to `NisApiId.NIS_REST_CHAIN_HEIGHT` for now. The `DefaultAsyncNemConnector<TApiId> `constructor takes 2 arguments: an `HttpMethodClient<ErrorResponseDeserializerUnion>` instance and an object implementing the interface `ErrorResponseStrategy`.
 
-The first parameter can be simply constructed with `new HttpMethodClient<ErrorResponseDeserializerUnion>().The `ErrorResponseDeserializerUnion` is simply a union that will contain either a `ErrorResponse` (available through the [getError()](http://www.nem.ninja/org.nem.core/org/nem/core/connect/ErrorResponse.html#getError--) method) or a `Deserializer` (available through the [getDeserializer](http://www.nem.ninja/org.nem.core/org/nem/core/connect/ErrorResponseDeserializerUnion.html#getDeserializer--) method)
+The first parameter can be simply constructed with `new HttpMethodClient<ErrorResponseDeserializerUnion>()`.The `ErrorResponseDeserializerUnion` is simply a union that will contain either a `ErrorResponse` (available through the [getError()](http://www.nem.ninja/org.nem.core/org/nem/core/connect/ErrorResponse.html#getError--) method) or a `Deserializer` (available through the [getDeserializer](http://www.nem.ninja/org.nem.core/org/nem/core/connect/ErrorResponseDeserializerUnion.html#getDeserializer--) method)
 
 The second parameter must be an object implementing the `ErrorResponseStrategy` interface, which is a functional interface. Hence the second parameter can be a method reference or a lambda expression. We will pass a lambda expression, and it will be called every time the `ErrorResponseDeserializerUnion` instance contains an error (which can be checked with the method [hasError()](http://www.nem.ninja/org.nem.core/org/nem/core/connect/ErrorResponseDeserializerUnion.html#hasError--).
 
@@ -81,7 +81,7 @@ import org.nem.core.model.BlockFactory;
 
 node = NodeEndpoint.fromHost("87.98.159.171");
 http = new HttpMethodClient<ErrorResponseDeserializerUnion>();
-conn = new DefaultAsyncNemConnector<NisApiId>(http,{ e -> throw new RuntimeException() ;});
+conn = new DefaultAsyncNemConnector<NisApiId>(http,{e->throw new RuntimeException();});
 conn.setAccountLookup(Account.metaClass.&invokeConstructor  )
 f=conn.getAsync(node,NisApiId.NIS_REST_CHAIN_HEIGHT,null)
 bh = new BlockHeight(f.get())
