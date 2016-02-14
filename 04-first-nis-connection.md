@@ -135,6 +135,7 @@ the transactions in this block, etc
 
 ### Code
 
+```
 import org.nem.core.model.BlockTypes
 import org.nem.core.model.VerifiableEntity.DeserializationOptions
 import org.nem.core.model.Block
