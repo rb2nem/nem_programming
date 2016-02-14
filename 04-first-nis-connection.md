@@ -97,3 +97,71 @@ bh = new BlockHeight(f.get())
 * [ErrorResponse](http://www.nem.ninja/org.nem.core/org/nem/core/connect/ErrorResponse.html)
 * [Deserializer](http://www.nem.ninja/org.nem.core/org/nem/core/serialization/Deserializer.html)
 * [blockHeight](http://www.nem.ninja/org.nem.core/org/nem/core/model/primitive/BlockHeight.html)
+
+## Getting the last block
+
+We will now look at how to get the last block. 
+
+### Code description
+
+To get the last block, we need to look at the [NisApiId](http://www.nem.ninja/org.nem.core/org/nem/core/connect/client/NisApiId.html#NIS_REST_CHAIN_LAST_BLOCK) enum
+and identify which API call gives us that info. Looking at the javadoc, [NIS_REST_CHAIN_LAST_BLOCK](http://www.nem.ninja/org.nem.core/org/nem/core/connect/client/NisApiId.html#NIS_REST_CHAIN_LAST_BLOCK) is providing exactly what we need.
+
+When we get the response, we'll again have a deserializer which we can use to contruct a `Block` instance.
+However, the `Block` constructor also takes 2 additional arguments: a block type and deserialisation options.
+
+There are two types of block in the NEM blockchain: one `NEMESIS` block, the first block of the chain, and `REGULAR` block, all other blocks.
+These are identified by respectively `BlockTypes.NEMESIS` and `BlockTypes.REGULAR`.
+
+The deserialisation options specify if the serialised data include a signature to verify the date or not.
+this corresponds respectively to `DeserializationOptions.VERIFIABLE` and `DeserializationOptions.NON_VERIFIABLE`.
+
+As we will request the last block, which is not the `NEMESIS` block, and as it includes a signature and is verifiable,
+we will construct the block with a call
+```
+new Block(BlockTypes.REGULAR, DeserializationOptions.VERIFIABLE, deserialiser)
+```
+
+With this code, it is clear that we need to know which type of block will be returned. With our query, it is clear
+that the block returned will be of type `REGULAR`, but what if our query might return the `NEMESIS` block?
+In that situation, you need to use `BlockFactory`, which will handle both types correctly with a call
+```
+BlockFactory.VERIFIABLE.deserialize(deserialiser)
+```
+
+Once you have a block, you can get all it information, such as its height, the total amount of fees for transactions in this block,
+the transactions in this block, etc
+
+
+### Code
+
+import org.nem.core.model.BlockTypes
+import org.nem.core.model.VerifiableEntity.DeserializationOptions
+import org.nem.core.model.Block
+import org.nem.core.model.Account;
+import org.nem.core.connect.client.DefaultAsyncNemConnector;
+import org.nem.core.connect.HttpMethodClient;
+import org.nem.core.connect.ErrorResponseDeserializerUnion;
+import org.nem.core.node.NodeEndpoint;
+import org.nem.core.connect.client.NisApiId;
+import org.nem.core.serialization.Deserializer;
+
+node = NodeEndpoint.fromHost("87.98.159.171");
+http = new HttpMethodClient<ErrorResponseDeserializerUnion>();
+conn = new DefaultAsyncNemConnector<NisApiId>(http,{ e -> throw new RuntimeException() ;});
+conn.setAccountLookup(Account.metaClass.&invokeConstructor  )
+f=conn.getAsync(node,NisApiId.NIS_REST_CHAIN_LAST_BLOCK,null)
+
+// REGULAR blocks only version
+block = new Block(BlockTypes.REGULAR, DeserializationOptions.VERIFIABLE, f.get())
+
+// any type of blocks
+block=BlockFactory.VERIFIABLE.deserialize(f.get())
+
+```
+
+### Javadoc links
+
+* [Block](http://www.nem.ninja/org.nem.core/org/nem/core/model/Block.html)
+* [BlockTypes](http://www.nem.ninja/org.nem.core/org/nem/core/model/BlockTypes.html)
+* [BlockFactory](http://www.nem.ninja/org.nem.core/org/nem/core/model/BlockFactory.html)
