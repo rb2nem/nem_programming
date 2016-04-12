@@ -1,0 +1,39 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+
+repositories {
+    flatDir {
+        dirs '/root/nem.core/target/'
+    }
+    flatDir {
+        dirs '/root/.groovy/lib/'
+    }
+}
+
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Nem Quickstart',
+                   'Implementation-Version': version
+    }
+}
+
+dependencies {
+//    compile group: fileTree(dir: '/root/.groovy/libs', include: '*.jar')
+//    compile group: fileTree(dir: '/root/nem.core/target', include: '*.jar')
+    runtime fileTree(dir: '/root/.groovy/lib', include: '*.jar')
+    compile("org.springframework.boot:spring-boot-starter-websocket:1.3.1.RELEASE")
+    compile name: 'nem-core-0.6.73-BETA'
+}
+
+
+// application
+mainClassName = "rb2nem.nemws.NemSpring"
