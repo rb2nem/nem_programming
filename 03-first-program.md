@@ -7,7 +7,7 @@ As explained in Chapter 2 of the [Technical Reference](http://nem.io/NEM_techRef
 An account is identified by its address, which is a base-32 encoded triplet consisting of:
 * network byte: is it an address on the testnet or the mainnet?
 * 160-bit hash of the public key
-* 4 byte chacksum
+* 4 byte checksum
 
 From this description we see that we can generate anew account offline, there's no need to be connected to the network to create an account. That's exactly what the est code does!
 
